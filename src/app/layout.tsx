@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Providers } from './providers'
 import './globals.css'
-import store from '@/store'
-import { Provider } from 'react-redux'
-import Providers from './provider'
-
 export const metadata: Metadata = {
   title: 'Bike Rentals in Dehradun, Uttarakhand',
   description:

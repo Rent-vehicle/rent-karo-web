@@ -38,18 +38,6 @@ const BikeRentalCarousel = () => {
     return () => clearInterval(interval)
   }, [carouselData.length])
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselData.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselData.length) % carouselData.length)
-  }
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
-
   return (
     <div
       className="relative h-screen w-screen overflow-hidden"
