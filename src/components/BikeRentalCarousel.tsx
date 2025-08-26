@@ -36,7 +36,7 @@ const BikeRentalCarousel = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [carouselData.length])
+  }, [])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselData.length)
