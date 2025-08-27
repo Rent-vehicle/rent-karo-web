@@ -36,7 +36,7 @@ const BikeRentalCarousel = () => {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [carouselData.length])
+  }, [])
 
   return (
     <div

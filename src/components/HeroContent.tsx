@@ -1,15 +1,17 @@
 'use client'
 
+import { getRandomPhoneNumber } from '@/utils/phoneNumber'
+
 const HeroContent = () => {
   const handleWhatsAppClick = (message: string) => {
-    const phoneNumber = '+919528865610'
+    const number = getRandomPhoneNumber()
     const encodedMessage = encodeURIComponent(message)
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`
+    const whatsappUrl = `https://wa.me/${number}?text=${encodedMessage}`
     window.open(whatsappUrl, '_blank')
   }
 
   const handleCallClick = () => {
-    window.open('tel:+919528865610', '_self')
+    window.open(`tel:${getRandomPhoneNumber()}`, '_self')
   }
 
   return (

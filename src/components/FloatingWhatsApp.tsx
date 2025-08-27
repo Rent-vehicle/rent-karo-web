@@ -1,10 +1,12 @@
 'use client'
 
+import { getRandomPhoneNumber } from '@/utils/phoneNumber'
+
 const FloatingWhatsApp = () => {
+  const number = getRandomPhoneNumber()
   const handleWhatsAppClick = () => {
-    const phoneNumber = '+919528865610'
     const message = encodeURIComponent('Hi! I need help with bike rental.')
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+    const whatsappUrl = `https://wa.me/${number}?text=${message}`
     window.open(whatsappUrl, '_blank')
   }
 
