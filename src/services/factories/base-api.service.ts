@@ -116,10 +116,7 @@ export class BaseApiService {
     );
   }
 
-  private async request<T>(
-    config: RequestConfig,
-    useAuth?: boolean
-  ): Promise<T> {
+  private async request<T>(config: RequestConfig, useAuth?: boolean): Promise<T> {
     const cancelToken = this.addToRequestMap(config.requestId);
     try {
       const response = await Axios.request<T>({
@@ -138,10 +135,7 @@ export class BaseApiService {
     }
   }
 
-  private async generateHeaders(
-    headers?: RawAxiosRequestHeaders,
-    useAuth?: boolean
-  ) {
+  private async generateHeaders(headers?: RawAxiosRequestHeaders, useAuth?: boolean) {
     const defaultHeaders: Record<string, string> = {};
     if (useAuth) {
       defaultHeaders.Authorization = `Bearer ${localStorageService.getAuthToken()}`;

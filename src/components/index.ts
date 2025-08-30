@@ -1,4 +1,8 @@
-export { default as BikeRentalCarousel } from './BikeRentalCarousel'
-export { default as HeroContent } from './HeroContent'
-export { default as FloatingWhatsApp } from './FloatingWhatsApp'
-export { default as StructuredData } from './StructuredData'
+export { default as BikeRentalCarousel } from "./BikeRentalCarousel";
+export { default as HeroContent } from "./HeroContent";
+export { default as FloatingWhatsApp } from "./FloatingWhatsApp";
+export { default as StructuredData } from "./StructuredData";
+export { default as LoginForm } from "./Auth/LoginForm";
+export { default as SignUpForm } from "./Auth/SignupForm";
+export { default as ForgotPasswordForm } from "./Auth/ForgotPasswordForm";
+export { default as ThemeToggle } from "./Auth/ThemeToggle";
