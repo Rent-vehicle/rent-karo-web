@@ -1,22 +1,22 @@
-import { apiRoutes } from '@/routes/api-routes';
-import { baseApiService } from '@/services/factories/base-api.service';
-import {
-  AuthResponse,
-  ForgetOrResetPasswordResponse,
-} from '@/types/api-response/auth-response';
-import { FetchMeResponse } from '@/types/api-response/user-response';
+import { apiRoutes } from "@/routes/api-routes";
+import { baseApiService } from "@/services/factories/base-api.service";
+import { AuthResponse, ForgetOrResetPasswordResponse } from "@/types/api-response/auth-response";
+import { FetchMeResponse } from "@/types/api-response/user-response";
 
 class AuthService {
   static getInstance(): AuthService {
     return new AuthService();
   }
 
-  async login(data: {
-    email: string;
-    password: string;
-    code: string;
-  }): Promise<AuthResponse> {
+  async login(data: { email: string; password: string }): Promise<AuthResponse> {
     return baseApiService.post<AuthResponse>(apiRoutes.auth.login, undefined, {
+      params: data,
+      extras: { useAuth: false },
+    });
+  }
+
+  async verifyEmail(data: { code: string }): Promise<string> {
+    return baseApiService.post<string>(apiRoutes.auth.verifyEmail, undefined, {
       params: data,
       extras: { useAuth: false },
     });
@@ -33,7 +33,6 @@ class AuthService {
     lastName: string;
     email: string;
     password: string;
-    code: string;
   }): Promise<AuthResponse> {
     return baseApiService.post<AuthResponse>(apiRoutes.auth.signup, undefined, {
       params: data,
@@ -48,10 +47,7 @@ class AuthService {
     });
   }
 
-  async forgetPassword(data: {
-    email: string;
-    code: string;
-  }): Promise<ForgetOrResetPasswordResponse> {
+  async forgetPassword(data: { email: string }): Promise<ForgetOrResetPasswordResponse> {
     return baseApiService.post<ForgetOrResetPasswordResponse>(
       apiRoutes.auth.forgetPassword,
       undefined,
@@ -60,6 +56,12 @@ class AuthService {
         extras: { useAuth: false },
       }
     );
+  }
+
+  async sendVerificationCode(): Promise<string> {
+    return baseApiService.post<string>(apiRoutes.auth.sendVerificationCode, undefined, {
+      extras: { useAuth: true },
+    });
   }
 
   async resetPassword(data: {

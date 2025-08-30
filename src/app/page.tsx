@@ -1,4 +1,12 @@
-import { BikeRentalCarousel, HeroContent, FloatingWhatsApp, StructuredData } from '@/components'
+import { BikeRentalCarousel, HeroContent, FloatingWhatsApp, StructuredData } from "@/components";
+import { Comfortaa } from "next/font/google";
+
+const comfortaa = Comfortaa({
+  weight: "300",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-comfortaa",
+});
 
 export default function Home() {
   return (
@@ -7,7 +15,7 @@ export default function Home() {
       <StructuredData />
 
       {/* Main Content */}
-      <main className="min-h-screen" role="main">
+      <main className={`min-h-screen font-sans ${comfortaa.variable}`} role="main">
         <section aria-label="Bike Rental Hero Section">
           <div className="relative">
             <BikeRentalCarousel />
@@ -17,5 +25,5 @@ export default function Home() {
         </section>
       </main>
     </>
-  )
+  );
 }

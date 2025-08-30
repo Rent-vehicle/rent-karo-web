@@ -6,6 +6,8 @@ export const apiRoutes = {
     forgetPassword: "/auth/forget-password",
     resetPassword: "/auth/reset-password",
     logout: "/auth/logout",
+    verifyEmail: "auth/verify-email",
+    sendVerificationCode: "auth/send-email-verification",
   },
   user: {
     fetchMe: "/users/me",
