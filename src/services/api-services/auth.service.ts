@@ -15,6 +15,13 @@ class AuthService {
     });
   }
 
+  async verifyEmail(data: { code: string }): Promise<string> {
+    return baseApiService.post<string>(apiRoutes.auth.verifyEmail, undefined, {
+      params: data,
+      extras: { useAuth: false },
+    });
+  }
+
   async fetchMe(): Promise<FetchMeResponse> {
     return baseApiService.get<FetchMeResponse>(apiRoutes.user.fetchMe, {
       extras: { useAuth: true },
@@ -49,6 +56,12 @@ class AuthService {
         extras: { useAuth: false },
       }
     );
+  }
+
+  async sendVerificationCode(): Promise<string> {
+    return baseApiService.post<string>(apiRoutes.auth.sendVerificationCode, undefined, {
+      extras: { useAuth: true },
+    });
   }
 
   async resetPassword(data: {

@@ -1,9 +1,8 @@
 "use client";
 
 import { localStorageService } from "@/services/factories/local-storage.service";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 
 export default function ProtectedWrapper({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -11,11 +10,25 @@ export default function ProtectedWrapper({ children }: { children: React.ReactNo
 
   useEffect(() => {
     const token = localStorageService.getAuthToken();
+    const justSignedUp = localStorageService.getLocalStorageValue("justSignedUp");
 
-    if (!token) {
-      router.push("/login");
-    } else {
+    const authPages = ["/login", "/signup", "/forgot-password"];
+    const protectedPages = ["/home", "/dashboard"];
+    const verifyEmailPage = "/verify-email";
+
+    if (token && authPages.includes(pathname)) {
       router.push("/home");
+      return;
+    }
+
+    if (!token && protectedPages.includes(pathname)) {
+      router.push("/login");
+      return;
+    }
+
+    if (pathname === verifyEmailPage && !justSignedUp) {
+      router.push("/signup");
+      return;
     }
   }, [router, pathname]);
 

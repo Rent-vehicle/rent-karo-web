@@ -59,7 +59,7 @@ export default function ForgotPasswordForm() {
           forgotPasswordMutation.mutate(values);
         }}
       >
-        {() => (
+        {({ isValid, dirty }) => (
           <Form>
             <Card className="flex flex-col gap-6">
               <div className="text-center mb-6">
@@ -77,7 +77,7 @@ export default function ForgotPasswordForm() {
                 placeholder="Enter your email"
               />
 
-              <Button type="submit" loading={false}>
+              <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
                 Send Reset Link
               </Button>
 

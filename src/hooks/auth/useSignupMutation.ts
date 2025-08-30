@@ -13,9 +13,9 @@ export const useSignupMutation = () => {
   return useMutation<AuthResponse, AxiosError, SignupData>({
     mutationFn: authService.signup,
     onSuccess: (data) => {
+      localStorageService.setLocalStorageValue("justSignedUp", "true");
+      router.push("/verify-email");
       localStorageService.setAuthToken(data.token);
-      router.push("/home");
-      queryClient.setQueryData(["user"], data.user);
     },
   });
 };

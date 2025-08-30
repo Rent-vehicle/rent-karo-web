@@ -32,7 +32,7 @@ export default function SignupForm() {
           signupMutation.mutate(values);
         }}
       >
-        {() => (
+        {({ isValid, dirty }) => (
           <Form>
             <Card className="flex flex-col gap-6">
               {/* Heading */}
@@ -86,7 +86,7 @@ export default function SignupForm() {
               </div>
 
               {/* Submit button */}
-              <Button type="submit" loading={false}>
+              <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
                 Create Account
               </Button>
 

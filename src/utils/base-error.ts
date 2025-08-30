@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { AxiosError } from 'axios';
-import { StatusCodes, StatusMessage } from '@/constant/status-codes';
+import { AxiosError } from "axios";
+import { StatusCodes, StatusMessage } from "@/constant/status-codes";
 export enum ErrorCode {
   UNIDENTIFIED,
 }
 
 export type ErrorStatusCode = ErrorCode | StatusCodes;
 
-const DEFAULT_ERROR = 'An unexpected error occurred. Please try again';
+const DEFAULT_ERROR = "An unexpected error occurred. Please try again";
 
 export class BaseError {
   constructor(
@@ -17,13 +16,13 @@ export class BaseError {
   ) {}
 
   static fromJSON(axiosError: AxiosError<any>): BaseError {
-    if (axiosError.code === 'ECONNABORTED') {
+    if (axiosError.code === "ECONNABORTED") {
       return new BaseError(`Request Timeout (${axiosError.message})`);
     }
 
     if (!axiosError.response) {
       return new BaseError(
-        'Unable to connect to server. Please check your internet connection try again.'
+        "Unable to connect to server. Please check your internet connection try again."
       );
     }
 

@@ -28,7 +28,7 @@ export default function LoginForm() {
         validationSchema={loginValidationSchema}
         onSubmit={(values) => loginMutation.mutate(values)}
       >
-        {() => (
+        {({ isValid, dirty }) => (
           <Form>
             <Card className="flex flex-col gap-6">
               {/* Heading */}
@@ -79,7 +79,11 @@ export default function LoginForm() {
 
               {/* Submit button */}
 
-              <Button type="submit" loading={false}>
+              <Button
+                disabled={!(isValid && dirty)}
+                loading={loginMutation.isPending}
+                type="submit"
+              >
                 Sign In
               </Button>
 
