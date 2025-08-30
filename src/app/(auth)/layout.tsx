@@ -1,7 +1,9 @@
+import ProtectedWrapper from "@/components/ProtectWrapper";
+
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <ProtectedWrapper>
       <main>{children}</main>
-    </div>
+    </ProtectedWrapper>
   );
 }

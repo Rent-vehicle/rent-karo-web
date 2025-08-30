@@ -14,12 +14,10 @@ export default function ProtectedWrapper({ children }: { children: React.ReactNo
 
     if (!token) {
       router.push("/login");
+    } else {
+      router.push("/home");
     }
   }, [router, pathname]);
-
-  if (typeof window !== "undefined" && !localStorageService.getAuthToken()) {
-    return null;
-  }
 
   return <>{children}</>;
 }
