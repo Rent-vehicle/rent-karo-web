@@ -5,36 +5,39 @@ import { useRouter } from "next/navigation";
 import { useGoogleLogin } from "@react-oauth/google";
 import Overlay from "./Overlay";
 import Button from "./Button";
+import { useGoogleOAuthTokenMutation } from "@/hooks/auth/useGoogleOAuthTokenMutation";
+import { toastService, ToastStyle, ToastType } from "@/services/ToastService";
 
 export default function GoogleLoginButton({ title }: { title: string }) {
   const router = useRouter();
   const [googleButtonClick, setGoogleButtonClick] = useState(false);
+  const mutation = useGoogleOAuthTokenMutation();
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const idToken = tokenResponse.access_token;
-
       try {
-        const res = await fetch("http://localhost:3000/auth/google", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token: idToken }),
-        });
-
-        const data = await res.json();
-
-        if (data.token) {
-          localStorage.setItem("authToken", data.token);
-          setGoogleButtonClick(false);
-          router.push("/dashboard");
-        } else {
-          console.error("Backend authentication failed:", data.message);
-          setGoogleButtonClick(false);
-        }
-      } catch (error) {
-        console.error("Error sending token to backend:", error);
+        mutation.mutate(
+          { token: tokenResponse.access_token },
+          {
+            onSuccess: (data) => {
+              localStorage.setItem("authToken", data.token);
+              setGoogleButtonClick(false);
+              router.push("/home");
+              toastService.showToast(
+                "Success",
+                ToastType.Success,
+                ToastStyle.Snackbar,
+                "Sign up successfully"
+              );
+            },
+            onError: (error) => {
+              toastService.showToast("Error", ToastType.Error, ToastStyle.Snackbar, error.message);
+              setGoogleButtonClick(false);
+            },
+          }
+        );
+      } catch (error: any) {
+        toastService.showToast("Error", ToastType.Error, ToastStyle.Snackbar, error);
         setGoogleButtonClick(false);
       }
     },

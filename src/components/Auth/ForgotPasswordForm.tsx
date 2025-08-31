@@ -11,12 +11,13 @@ import { Title } from "@/components/Title";
 import { Description } from "@/components/Description";
 import { forgotPasswordValidationSchema } from "../Helper/Validators";
 import { useForgotPasswordMutation } from "@/hooks/auth/useForgotPasswordMutation";
+import LogoAndName from "../LogoAndName";
 
 export default function ForgotPasswordForm() {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const forgotPasswordMutation = useForgotPasswordMutation();
 
-  if (forgotPasswordMutation.isSuccess || isEmailSent) {
+  if (forgotPasswordMutation.isSuccess && isEmailSent) {
     return (
       <div className="min-h-screen bg-white text-black flex items-center justify-center p-5">
         <Card className="text-center">
@@ -61,8 +62,8 @@ export default function ForgotPasswordForm() {
       >
         {({ isValid, dirty }) => (
           <Form>
-            <Card className="flex flex-col gap-6">
-              <div className="text-center mb-6">
+            <Card className="flex flex-col gap-6 min-w-lg">
+              <div className="text-center mb-4">
                 <Title>Forgot Password?</Title>
                 <Description>
                   Enter your email address and we&apos;ll send you a link to reset your password.
