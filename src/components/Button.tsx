@@ -1,10 +1,11 @@
-import { useQueryTheme } from "@/hooks/useQueryTheme";
 import React from "react";
+import Loader from "./Loader";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   children: React.ReactNode;
-  variant?: "primary" | "outline" | "ghost";
+  variant?: "primary" | "outline" | "ghost" | "danger";
+  fullWidth?: boolean;
 }
 
 export default function Button({
@@ -12,23 +13,16 @@ export default function Button({
   children,
   className = "",
   variant = "primary",
+  fullWidth = false,
   ...props
 }: ButtonProps) {
-  const { isLight } = useQueryTheme();
-
-  const baseClasses =
-    "w-full py-4 px-6 rounded-full font-semibold text-base cursor-pointer shadow-gray-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-black/60 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center gap-3";
+  const baseClasses = `${fullWidth ? "w-full" : "w-auto"} px-6 py-3 text-base rounded-full font-semibold cursor-pointer shadow-gray-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-black/60 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg flex items-center justify-center gap-3 `;
 
   const variantClasses = {
-    primary: isLight
-      ? "bg-black hover:bg-gray-900 text-white "
-      : "bg-white hover:bg-gray-200 text-black",
-    outline: isLight
-      ? "bg-transparent border border-black text-black shadow-gra"
-      : "bg-transparent border border-white text-white hover:bg-white hover:text-black",
-    ghost: isLight
-      ? "bg-transparent text-black hover:bg-gray-100"
-      : "bg-transparent text-white hover:bg-gray-800",
+    primary: "bg-black hover:bg-gray-900 text-white",
+    outline: "bg-transparent border border-black text-black",
+    ghost: "bg-transparent text-black hover:bg-gray-100",
+    danger: "bg-red-600 hover:bg-red-700 text-white",
   };
 
   return (
@@ -37,7 +31,13 @@ export default function Button({
       disabled={props.disabled || loading}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
     >
-      <span>{loading ? "Loading..." : children}</span>
+      {loading ? (
+        <>
+          <Loader size="lg" variant="dots" className="text-current" />
+        </>
+      ) : (
+        children
+      )}
     </button>
   );
 }

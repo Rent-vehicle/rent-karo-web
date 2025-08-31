@@ -1,7 +1,12 @@
 const ENV_CONFIG = {
-  BACKEND_URL: process.env.NEXT_PUBLIC_API_URL || "",
+  BACKEND_URL: process.env.NEXT_PUBLIC_API_URL,
   GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
   APP_ENV: process.env.NEXT_PUBLIC_APP_ENV,
+  TEST_EMAIL: process.env.TEST_EMAIL,
+  TEST_PASSWORD: process.env.TEST_PASSWORD,
+  CI: process.env.NEXT_PUBLIC_CI,
+  TEST_USER_NAME: process.env.NEXT_PUBLIC_TEST_USER_NAME,
+  FE_URL: process.env.NEXT_PUBLIC_FE_BASE_URL,
 };
 
 export default ENV_CONFIG;
