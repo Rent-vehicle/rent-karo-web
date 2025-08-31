@@ -65,7 +65,12 @@ export default function VerificationForm() {
               <Input id="otp" name="otp" label="OTP Code" type="text" placeholder="Enter OTP" />
 
               <div className="flex gap-4 justify-between">
-                <Button fullWidth disabled={!(isValid && dirty)} type="submit" loading={false}>
+                <Button
+                  fullWidth
+                  disabled={!(isValid && dirty) || verifyOtpMutation.isPending}
+                  type="submit"
+                  loading={verifyOtpMutation.isPending}
+                >
                   Verify OTP
                 </Button>
 

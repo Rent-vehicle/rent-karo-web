@@ -6,3 +6,4 @@ export { default as LoginForm } from "./Auth/LoginForm";
 export { default as SignUpForm } from "./Auth/SignupForm";
 export { default as ForgotPasswordForm } from "./Auth/ForgotPasswordForm";
 export { default as ThemeToggle } from "./Auth/ThemeToggle";
+export { default as Dashboard } from "./Home";

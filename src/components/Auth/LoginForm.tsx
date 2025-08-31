@@ -74,7 +74,7 @@ export default function LoginForm() {
               {/* Submit button */}
 
               <Button
-                disabled={!(isValid && dirty)}
+                disabled={!(isValid && dirty) || loginMutation.isPending}
                 loading={loginMutation.isPending}
                 type="submit"
               >

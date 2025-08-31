@@ -87,7 +87,11 @@ export default function SignupForm() {
               </div>
 
               {/* Submit button */}
-              <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
+              <Button
+                disabled={!(isValid && dirty) || signupMutation.isPending}
+                type="submit"
+                loading={signupMutation.isPending}
+              >
                 Create Account
               </Button>
 
