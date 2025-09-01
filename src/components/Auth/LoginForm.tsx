@@ -11,18 +11,13 @@ import { loginValidationSchema } from "../Helper/Validators";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
 import { LoginData } from "@/types/api-response/auth-response";
 import GoogleLoginButton from "../GoogleLoginButton";
-import { useSearchParams } from "next/navigation";
-import { useQueryTheme } from "@/hooks/useQueryTheme";
+import Divider from "../Divider";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const loginMutation = useLoginMutation();
-  const { isLight } = useQueryTheme();
-
   return (
-    <div
-      className={`min-h-screen  flex items-center justify-center p-5 ${isLight ? "bg-white text-black" : "bg-black text-white"}`}
-    >
+    <div className={`min-h-screen  flex items-center justify-center p-5 bg-white text-black`}>
       <Formik<LoginData>
         initialValues={{ email: "", password: "" }}
         validationSchema={loginValidationSchema}
@@ -30,10 +25,10 @@ export default function LoginForm() {
       >
         {({ isValid, dirty }) => (
           <Form>
-            <Card className="flex flex-col gap-6">
+            <Card className="flex flex-col gap-6  min-w-lg">
               {/* Heading */}
 
-              <div className="text-center mb-6">
+              <div className="text-center mb-4">
                 <Title>Welcome Back</Title>
                 <Description> Sign in to continue</Description>
               </div>
@@ -55,7 +50,7 @@ export default function LoginForm() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   label="Password"
-                  placeholder="Create a password"
+                  placeholder="Enter your password"
                 />
                 <button
                   type="button"
@@ -80,13 +75,14 @@ export default function LoginForm() {
               {/* Submit button */}
 
               <Button
-                disabled={!(isValid && dirty)}
+                disabled={!(isValid && dirty) || loginMutation.isPending}
                 loading={loginMutation.isPending}
                 type="submit"
               >
                 Sign In
               </Button>
 
+              <Divider />
               {/* Google Login Button */}
               <GoogleLoginButton title="Sign in" />
 

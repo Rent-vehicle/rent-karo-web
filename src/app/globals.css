@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme inline {
   --font-sans:
@@ -26,4 +26,86 @@ body {
   font-weight: 300; /* Light weight */
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Custom toast styles */
+.Toastify__toast {
+  font-family: var(--font-comfortaa), sans-serif !important;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus styles for accessibility */
+*:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark mode scrollbar */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #475569;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+  }
+}
+
+/* Default progress bar color */
+.Toastify__progress-bar {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8) !important;
+}
+
+/* Success toast progress bar */
+.Toastify__toast--success .Toastify__progress-bar {
+  background: linear-gradient(to right, #10b981, #059669) !important;
+}
+
+/* Error toast progress bar */
+.Toastify__toast--error .Toastify__progress-bar {
+  background: linear-gradient(to right, #ef4444, #dc2626) !important;
+}
+
+/* Warning toast progress bar */
+.Toastify__toast--warning .Toastify__progress-bar {
+  background: linear-gradient(to right, #f59e0b, #d97706) !important;
+}
+
+/* Info toast progress bar */
+.Toastify__toast--info .Toastify__progress-bar {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8) !important;
 }

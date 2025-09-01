@@ -6,6 +6,7 @@ import { AxiosError } from "axios";
 import { AuthResponse, LoginData } from "@/types/api-response/auth-response";
 import { useRouter } from "next/navigation";
 import { localStorageService } from "@/services/factories/local-storage.service";
+import { toastService, ToastStyle, ToastType } from "@/services/ToastService";
 
 export const useLoginMutation = () => {
   const queryClient = useQueryClient();
@@ -17,6 +18,7 @@ export const useLoginMutation = () => {
       localStorageService.setAuthToken(data.token);
 
       router.push("/home");
+      toastService.showToast("Success", ToastType.Error, ToastStyle.Snackbar);
 
       queryClient.setQueryData(["user"], data.user);
     },

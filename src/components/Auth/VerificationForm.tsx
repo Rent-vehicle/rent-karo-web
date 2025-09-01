@@ -14,6 +14,7 @@ import { verifyEMailValidationSchema } from "../Helper/Validators";
 import { localStorageService } from "@/services/factories/local-storage.service";
 import { useRouter } from "next/navigation";
 import { useResendCodeMutation } from "@/hooks/auth/useResentCodeMutation";
+import LogoAndName from "../LogoAndName";
 
 export default function VerificationForm() {
   const verifyOtpMutation = useVerifyEmailMutation();
@@ -53,8 +54,8 @@ export default function VerificationForm() {
       >
         {({ isValid, dirty }) => (
           <Form>
-            <Card className="flex flex-col gap-6">
-              <div className="text-center mb-6">
+            <Card className="flex flex-col gap-6 min-w-lg">
+              <div className="text-center mb-4">
                 <Title>OTP Verification</Title>
                 <Description>
                   Enter the 6-digit code sent to <span className="font-medium">email</span>.
@@ -64,16 +65,23 @@ export default function VerificationForm() {
               <Input id="otp" name="otp" label="OTP Code" type="text" placeholder="Enter OTP" />
 
               <div className="flex gap-4 justify-between">
-                <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
+                <Button
+                  fullWidth
+                  disabled={!(isValid && dirty) || verifyOtpMutation.isPending}
+                  type="submit"
+                  loading={verifyOtpMutation.isPending}
+                >
                   Verify OTP
                 </Button>
 
                 <Button
+                  fullWidth
                   onClick={() => {
                     localStorageService.removeLocalStorageValue("justSignedUp");
 
                     router.push("/home");
                   }}
+                  type="button"
                   variant="outline"
                 >
                   Skip
@@ -87,7 +95,7 @@ export default function VerificationForm() {
               )}
 
               <div className="text-center mt-5">
-                <span>Didn&#39;t have an account?</span>
+                <span>Didn&#39;t have an account? </span>
                 <button
                   onClick={handleResend}
                   disabled={timer > 0}

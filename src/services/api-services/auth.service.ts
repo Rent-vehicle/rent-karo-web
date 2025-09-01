@@ -58,6 +58,12 @@ class AuthService {
     );
   }
 
+  async googleOAuthToken(data: { token: string }): Promise<{ token: string }> {
+    return baseApiService.post(apiRoutes.auth.sentGoogleOAuthToken, undefined, {
+      params: data,
+    });
+  }
+
   async sendVerificationCode(): Promise<string> {
     return baseApiService.post<string>(apiRoutes.auth.sendVerificationCode, undefined, {
       extras: { useAuth: true },

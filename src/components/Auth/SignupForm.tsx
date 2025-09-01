@@ -13,6 +13,8 @@ import { signupValidationSchema } from "../Helper/Validators";
 import { SignupData } from "@/types/api-response/auth-response";
 import { useSignupMutation } from "@/hooks/auth/useSignupMutation";
 import GoogleLoginButton from "../GoogleLoginButton";
+import LogoAndName from "../LogoAndName";
+import Divider from "../Divider";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,15 +36,15 @@ export default function SignupForm() {
       >
         {({ isValid, dirty }) => (
           <Form>
-            <Card className="flex flex-col gap-6">
+            <Card className="flex flex-col gap-6 min-w-lg">
               {/* Heading */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-4">
                 <Title>Create Account</Title>
                 <Description>Join us and start your journey</Description>
               </div>
 
               {/* First + Last Name */}
-              <div className="flex gap-3">
+              <div className="flex items-center justify-between gap-3">
                 <Input
                   id="firstName"
                   name="firstName"
@@ -86,9 +88,15 @@ export default function SignupForm() {
               </div>
 
               {/* Submit button */}
-              <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
+              <Button
+                disabled={!(isValid && dirty) || signupMutation.isPending}
+                type="submit"
+                loading={signupMutation.isPending}
+              >
                 Create Account
               </Button>
+
+              <Divider />
 
               {/* Google Login Button */}
               <GoogleLoginButton title="Sign up" />

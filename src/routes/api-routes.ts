@@ -8,9 +8,10 @@ export const apiRoutes = {
     logout: "/auth/logout",
     verifyEmail: "auth/verify-email",
     sendVerificationCode: "auth/send-email-verification",
+    sentGoogleOAuthToken: "google/oAuth/token",
   },
   user: {
-    fetchMe: "/users/me",
+    fetchMe: "/me",
     updateProfile: "/users/update",
     updatePassword: "/users/update-password",
   },

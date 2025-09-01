@@ -7,6 +7,7 @@ import { useState } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ENV_CONFIG from "@/constant/env-config"; // Assuming you have this constant
 import LoadingIndicator from "@/components/LoadingIndicator";
+import { ToastContainer } from "react-toastify";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -22,6 +23,15 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <LoadingIndicator />
         {children}
+        <ToastContainer
+          theme="light"
+          limit={5}
+          closeButton={false}
+          pauseOnFocusLoss={false}
+          style={{ fontFamily: "var(--font-comfortaa), sans-serif" }}
+          toastClassName="!bg-white  !border !border-gray-200 !shadow-lg !rounded-lg"
+          className="!p-4"
+        />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </GoogleOAuthProvider>
