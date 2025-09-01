@@ -11,7 +11,7 @@ export const apiRoutes = {
     sentGoogleOAuthToken: "google/oAuth/token",
   },
   user: {
-    fetchMe: "/users/me",
+    fetchMe: "/me",
     updateProfile: "/users/update",
     updatePassword: "/users/update-password",
   },

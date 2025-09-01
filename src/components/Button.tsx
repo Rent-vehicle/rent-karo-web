@@ -31,13 +31,7 @@ export default function Button({
       disabled={props.disabled || loading}
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
     >
-      {loading ? (
-        <>
-          <Loader size="lg" variant="dots" className="text-current" />
-        </>
-      ) : (
-        children
-      )}
+      {loading ? <Loader size="lg" variant="dots" className="text-current" /> : children}
     </button>
   );
 }

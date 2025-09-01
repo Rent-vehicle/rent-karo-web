@@ -1,20 +1,27 @@
+"use client";
+
 import ProtectedWrapper from "@/components/ProtectWrapper";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
+import { useFetchMeQuery } from "@/hooks/user/useFetchMeQuery";
+import Loader from "@/components/Loader";
 
 export default function PrivateLayout({ children }: { children: React.ReactNode }) {
-  // Mock user data - replace with actual user data from your auth context
-  const mockUser = {
-    name: "John",
-    email: "john@example.com",
-    avatar: undefined,
-  };
+  const { isLoading, data } = useFetchMeQuery();
+  if (isLoading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        {" "}
+        <Loader variant="spinner" />
+      </div>
+    );
+  }
 
   return (
     <ProtectedWrapper>
       <div className="min-h-screen bg-white flex flex-col">
-        <Header user={mockUser} />
+        <Header user={data} />
         <main className="flex-1">
           <Container>{children}</Container>
         </main>

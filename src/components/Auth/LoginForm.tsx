@@ -11,6 +11,7 @@ import { loginValidationSchema } from "../Helper/Validators";
 import { useLoginMutation } from "@/hooks/auth/useLoginMutation";
 import { LoginData } from "@/types/api-response/auth-response";
 import GoogleLoginButton from "../GoogleLoginButton";
+import Divider from "../Divider";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -74,13 +75,14 @@ export default function LoginForm() {
               {/* Submit button */}
 
               <Button
-                disabled={!(isValid && dirty)}
+                disabled={!(isValid && dirty) || loginMutation.isPending}
                 loading={loginMutation.isPending}
                 type="submit"
               >
                 Sign In
               </Button>
 
+              <Divider />
               {/* Google Login Button */}
               <GoogleLoginButton title="Sign in" />
 

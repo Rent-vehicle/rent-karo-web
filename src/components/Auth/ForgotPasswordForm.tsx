@@ -78,7 +78,11 @@ export default function ForgotPasswordForm() {
                 placeholder="Enter your email"
               />
 
-              <Button disabled={!(isValid && dirty)} type="submit" loading={false}>
+              <Button
+                disabled={!(isValid && dirty) || forgotPasswordMutation.isPending}
+                type="submit"
+                loading={forgotPasswordMutation.isPending}
+              >
                 Send Reset Link
               </Button>
 
