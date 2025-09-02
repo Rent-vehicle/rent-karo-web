@@ -20,7 +20,7 @@ export const useLoginMutation = () => {
       router.push("/home");
       toastService.showToast("Success", ToastType.Error, ToastStyle.Snackbar);
 
-      queryClient.setQueryData(["user"], data.user);
+      queryClient.setQueryData(["me"], data.user);
     },
   });
 };

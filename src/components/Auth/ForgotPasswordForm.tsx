@@ -11,7 +11,6 @@ import { Title } from "@/components/Title";
 import { Description } from "@/components/Description";
 import { forgotPasswordValidationSchema } from "../Helper/Validators";
 import { useForgotPasswordMutation } from "@/hooks/auth/useForgotPasswordMutation";
-import LogoAndName from "../LogoAndName";
 
 export default function ForgotPasswordForm() {
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -19,8 +18,8 @@ export default function ForgotPasswordForm() {
 
   if (forgotPasswordMutation.isSuccess && isEmailSent) {
     return (
-      <div className="min-h-screen bg-white text-black flex items-center justify-center p-5">
-        <Card className="text-center">
+      <div className="min-h-screen bg-white text-black flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <Card className="w-full max-w-md text-center p-6 sm:p-8">
           <div className="text-5xl mb-5">📧</div>
           <Title>Check Your Email</Title>
           <Description>
@@ -30,7 +29,7 @@ export default function ForgotPasswordForm() {
 
           <div className="my-6">
             <Link href="/login">
-              <Button>Back to Login</Button>
+              <Button className="w-full sm:w-auto">Back to Login</Button>
             </Link>
           </div>
 
@@ -51,7 +50,7 @@ export default function ForgotPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black flex items-center justify-center p-5">
+    <div className="min-h-screen bg-white text-black flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <Formik
         initialValues={{ email: "" }}
         validationSchema={forgotPasswordValidationSchema}
@@ -61,8 +60,8 @@ export default function ForgotPasswordForm() {
         }}
       >
         {({ isValid, dirty }) => (
-          <Form>
-            <Card className="flex flex-col gap-6 min-w-lg">
+          <Form className="w-full max-w-md">
+            <Card className="flex flex-col gap-6 p-6 sm:p-8">
               <div className="text-center mb-4">
                 <Title>Forgot Password?</Title>
                 <Description>
@@ -82,6 +81,7 @@ export default function ForgotPasswordForm() {
                 disabled={!(isValid && dirty) || forgotPasswordMutation.isPending}
                 type="submit"
                 loading={forgotPasswordMutation.isPending}
+                className="w-full"
               >
                 Send Reset Link
               </Button>

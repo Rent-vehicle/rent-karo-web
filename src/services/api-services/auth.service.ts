@@ -71,10 +71,8 @@ class AuthService {
   }
 
   async resetPassword(data: {
-    code: string;
     token: string;
     password: string;
-    confirmPassword: string;
   }): Promise<ForgetOrResetPasswordResponse> {
     return baseApiService.post<ForgetOrResetPasswordResponse>(
       apiRoutes.auth.resetPassword,

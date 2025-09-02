@@ -3,6 +3,7 @@ import { User } from "@/models/entities/user";
 export interface AuthResponse {
   user: User;
   token: string;
+  isEmailVerified: boolean;
 }
 export interface ForgetOrResetPasswordResponse {
   message: string;

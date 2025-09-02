@@ -15,6 +15,7 @@ export const useSignupMutation = () => {
     onSuccess: (data) => {
       localStorageService.setLocalStorageValue("justSignedUp", "true");
       router.push("/verify-email");
+      queryClient.setQueryData(["me"], data.user);
       localStorageService.setAuthToken(data.token);
     },
   });

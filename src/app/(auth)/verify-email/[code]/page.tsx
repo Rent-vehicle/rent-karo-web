@@ -2,11 +2,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-// Dynamically import components that use localStorage to prevent SSR issues
 const VerifyEmailForm = dynamic(() => import("@/components/Auth/VerificationForm"), {
   ssr: false,
 });
 
-export default function VerifyEmailPage() {
-  return <VerifyEmailForm isShowSkipButton={true} />;
+export default function VerifyEmailCodePage({ params }: { params: { code: string } }) {
+  return <VerifyEmailForm code={params.code} isShowSkipButton={false} />;
 }

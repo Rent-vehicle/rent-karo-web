@@ -58,6 +58,7 @@ export default function GoogleLoginButton({ title }: { title: string }) {
           login();
         }}
         variant="outline"
+        type="button"
       >
         <div className="flex items-center gap-3">
           <svg

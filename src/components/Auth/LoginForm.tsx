@@ -16,21 +16,21 @@ import Divider from "../Divider";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const loginMutation = useLoginMutation();
+
   return (
-    <div className={`min-h-screen  flex items-center justify-center p-5 bg-white text-black`}>
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-white text-black">
       <Formik<LoginData>
         initialValues={{ email: "", password: "" }}
         validationSchema={loginValidationSchema}
         onSubmit={(values) => loginMutation.mutate(values)}
       >
         {({ isValid, dirty }) => (
-          <Form>
-            <Card className="flex flex-col gap-6  min-w-lg">
+          <Form className="w-full max-w-md">
+            <Card className="flex flex-col gap-6 p-6 sm:p-8">
               {/* Heading */}
-
               <div className="text-center mb-4">
                 <Title>Welcome Back</Title>
-                <Description> Sign in to continue</Description>
+                <Description>Sign in to continue</Description>
               </div>
 
               {/* Email */}
@@ -43,7 +43,6 @@ export default function LoginForm() {
               />
 
               {/* Password */}
-
               <div className="relative">
                 <Input
                   id="password"
@@ -55,8 +54,8 @@ export default function LoginForm() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-15 transform -translate-y-1/2 
-                               text-gray-500 cursor-pointer text-lg hover:text-black transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 
+                             text-gray-500 cursor-pointer text-lg hover:text-black transition-colors"
                 >
                   {showPassword ? "🙈" : "👁️"}
                 </button>
@@ -73,16 +72,17 @@ export default function LoginForm() {
               </div>
 
               {/* Submit button */}
-
               <Button
                 disabled={!(isValid && dirty) || loginMutation.isPending}
                 loading={loginMutation.isPending}
                 type="submit"
+                className="w-full"
               >
                 Sign In
               </Button>
 
               <Divider />
+
               {/* Google Login Button */}
               <GoogleLoginButton title="Sign in" />
 
